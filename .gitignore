@@ -1,0 +1,4 @@
+*.FITS
+*.fits
+.ipynb_checkpoints/
+__pycache__/
