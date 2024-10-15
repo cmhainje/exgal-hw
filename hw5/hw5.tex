@@ -1,0 +1,394 @@
+\documentclass{article}
+
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage[parfill]{parskip}
+\usepackage{hyperref}
+
+\AtBeginEnvironment{quote}{\par\small}
+
+\renewcommand{\d}{\mathrm{d}}
+
+
+\begin{document}
+
+{
+	\centering
+	\section*{Extragalactic Astrophysics HW5}
+	Connor Hainje
+	\vspace{2em}
+	\par
+}
+
+\textbf{Structure Formation, Analytic Exercise \#5}.
+
+\begin{quote}
+	Consider a spherical region with mean overdensity $\bar\delta > 0$,
+	within an expanding universe with no cosmological constant. As long as
+	there is no \textit{shell crossing} --- that is, material at one radius
+	does not catch up to material at another radius --- the equations
+	governing the radius of this sphere over time are
+	\begin{equation}
+		\label{eq:given}
+		\frac{\d^2 R}{\d t^2}
+		= - \frac{G M(<R)}{R^2}
+		= - \frac{4 \pi G}{3} \bar\rho \left(1 + \bar\delta\right) R
+	\end{equation}
+\end{quote}
+
+\section*{part (a)}
+
+\begin{quote}
+	In terms of $\Omega_m$ at the present time, what is the condition that
+	the spherical region will collapse on itself?
+\end{quote}
+
+Let's begin with the first equality in Equation~\ref{eq:given}. We can massage
+it slightly to obtain
+\begin{equation}
+	\frac{\d^2 R}{\d t^2} + \frac{G M}{R^2} = 0.
+\end{equation}
+Note that we drop the $(<R)$ for the enclosed mass because the mass in this
+spherical region is conserved (due to the assumption of no shell crossing), and
+so $M$ is a constant.
+
+We integrate this equation over $R$. The first term integrates as
+\begin{equation}
+	\int \frac{\d^2 R}{\d t^2} \,\d R
+	= 
+	\int \frac{\d^2 R}{\d t^2} \, \frac{\d R}{\d t} \,\d t
+	=
+	\frac{1}{2} \left( \frac{\d R}{\d t} \right)^2.
+\end{equation}
+The second term gives
+\begin{equation}
+	\int \frac{G M}{R^2} \,\d R
+	=
+	-\frac{G M}{R},
+\end{equation}
+and the integral of $0$ is a constant, which we'll call $E$. Thus,
+\begin{equation}
+	\frac{1}{2} \left( \frac{\d R}{\d t} \right)^2
+	-\frac{G M}{R}
+	= E.
+\end{equation}
+
+Mukhanov \S 1.2.3 points out that this is the same form as the calculation
+of the escape velocity for an object to escape the gravitational field of some
+body. In particular, $R$ can be seen as describing the height of the object.
+For that scenario, $E > 0$ means that the object is able to escape, where $E <
+0$ describes the object gaining some height before turning around and falling
+back down. In our case, $R$ increasing to some maximum before turning around
+and crashing to zero is exactly the behavior of collapse, so our condition is
+that $E < 0$.
+
+For $E < 0$ to be true, we must have $\dot R^2 < 2 G M / R$. We can use the fact
+that we know the mass $M$ in terms of the mean density of the universe $\bar
+\rho$, the mean overdensity of the sphere $\bar \delta$ and the radius of the
+sphere $R$ to re-arrange this into
+\begin{equation}
+	\begin{aligned}
+	\dot R^2
+	&< \frac{2 G}{R} \frac{4 \pi}{3} \bar\rho \left(1 + \bar\delta\right) R^3 \\
+	&< \frac{8 \pi G}{3} \bar\rho \left(1 + \bar\delta\right) R^2.
+	\end{aligned}
+\end{equation}
+We also know that the matter density parameter today is given by
+\begin{equation}
+	\Omega_m = \frac{8 \pi G}{3 H^2} \bar \rho,
+\end{equation}
+which we can use to replace $\bar \rho$, yielding
+\begin{equation}
+	\dot R^2 < H^2 \Omega_m \left(1 + \bar\delta\right) R^2.
+\end{equation}
+Rearranging gives
+\begin{equation}
+	\frac{(\dot R / R)^2}{H^2} < \Omega_m \left(1 + \bar\delta\right).
+\end{equation}
+\textit{Initially}, the spherical overdensity will be expanding due to the
+expansion of the universe, so $\dot R / R = H$ at $t = 0$. Since $\bar\delta$
+describes the initial overdensity, the entire inequality is technically being
+considered at the initial time, so we can use this! Cancelling these terms, we
+finally obtain
+\begin{equation}
+	\Omega_m \left(1 + \bar\delta\right) > 1,
+\end{equation}
+as was seen in the notes.
+
+
+\section*{part (b)}
+
+\begin{quote}
+	Demonstrate that the solutions to the above equation can be expressed as
+	\begin{equation}
+		\begin{gathered}
+			R / R_m = (1 - \cos\eta) / 2, \\
+			t / t_m = (\eta - \sin\eta) / \pi, \\
+		\end{gathered}
+		\label{eq:ansatz}
+	\end{equation}
+	where at time $t_m$ the sphere reaches its maximum radius $R_m$, before
+	collapsing.
+\end{quote}
+
+First, let's analyze the ansatz. $t/t_m$ is a monotonically increasing function
+of $\eta$, which on average increases by 1 for an increase in $\eta$ of $\pi$.
+As such, we can think of $\eta$ as a parameterization of time. Then, $R / R_m$
+is a simple cosine varying from $0$ to $1$ with a period of $2 \pi$. It starts
+at zero, increases to $1$ at $\eta = \pi$ ($t = t_m$), then decreases back to
+zero at $\eta = 2\pi$ ($t = 2 t_m$). I don't think it really makes sense to
+continue the solution beyond $\eta = 2\pi$, so we'll limit our analysis to this
+first period only.
+
+OK, now let's try out the ansatz. Given the behavior we described above, we can
+compute $E$. Because we know that $R$ turns around when $R = R_m$, $\d R/\d\eta
+= 0$ at that point.\footnote{%
+Actually, regardless of the ansatz we choose to take, this must hold for any
+solution which is initially expanding, then collapsing, and the maximum radius
+is labeled $R_m$.} 
+Since $E$ is conserved, we can just compute it at this moment, and we know that
+it will hold for all $\eta$. We find
+\begin{equation}
+	E = - \frac{G M}{R_m},
+\end{equation}
+which is certainly negative.
+
+Next, we can evaluate the expression which we defined to be equal to $E$. To
+start, let's evaluate $\d R/\d t$.
+\begin{equation}
+	\frac{\d R}{\d t}
+	= \frac{\d \eta}{\d t} \frac{\d R}{\d \eta}
+	= \frac{R'}{t'},
+\end{equation}
+where we are now considering $R$ and $t$ to be functions of $\eta$ alone, and
+the prime denotes a derivative (w.r.t.~$\eta$). Taking these derivatives of the
+ansatz, we find
+\begin{equation}
+	\frac{\d R}{\d t}
+	= \frac{(R_m/2) \sin\eta}{(t_m/\pi) (1 - \cos\eta)}
+	= \frac{\pi R_m}{2 t_m} \frac{\sin \eta}{1 - \cos\eta}.
+\end{equation}
+Now we can evaluate
+\begin{equation}
+\begin{aligned}
+	E
+	&= \frac{1}{2} \left(
+		\frac{\pi R_m}{2 t_m} \frac{\sin \eta}{1 - \cos\eta}
+	\right)^2 - \frac{2GM}{R_m} \frac{1}{1 - \cos\eta} \\
+	&= \frac{1}{(1 - \cos\eta)^2} \left[
+		\frac{\pi^2 R_m^2}{8 t_m^2} \sin^2 \eta
+		- \frac{2 G M}{R_m} (1 - \cos \eta)
+	\right].
+\end{aligned}
+\end{equation}
+We require this to reduce to $E = -G M / R_m$. Let's keep manipulating this
+expression until we get something obvious.
+\begin{equation}
+\begin{aligned}
+	E
+	&= \frac{1}{(1 - \cos\eta)^2} \left[
+		\frac{\pi^2 R_m^2}{8 t_m^2} \sin^2 \eta
+		- \frac{2 G M}{R_m} (1 - \cos \eta)
+	\right] \\
+	&= \frac{G M}{R_m} \frac{1}{(1 - \cos\eta)^2} \left[
+		\frac{\pi^2 R_m^3}{8 G M t_m^2} (1 - \cos^2 \eta)
+		- 2 (1 - \cos \eta)
+	\right] \\
+\end{aligned}
+\end{equation}
+Now, if $(\pi^2 R_m^3)/(8 G M t_m^2)$ were equal to 1, we would find
+\begin{equation}
+\begin{aligned}
+	E
+	&= \frac{G M}{R_m} \frac{1}{(1 - \cos\eta)^2} \left[
+		(1 - \cos^2 \eta) - 2 (1 - \cos \eta)
+	\right] \\
+	&= -\frac{G M}{R_m} \frac{1}{(1 - \cos\eta)^2} \left[
+		1 - 2 \cos \eta + \cos^2 \eta
+	\right] \\
+	&= -\frac{G M}{R_m}.
+\end{aligned}
+\end{equation}
+So, the given ansatz describes a one-parameter family of collapsing solutions with
+\begin{equation}
+	E = - GM/R_m, \quad t_m^2 = \frac{\pi^2 R_m^3}{8 G M}.
+\end{equation}
+I'm not sure how to (or if one can) show this is the only family of collapsing
+solutions, but we've certainly verified that is one such family.
+
+
+\section*{part (c)}
+
+\begin{quote}
+	Show that at time $t_m$, the density of the sphere relative to the mean
+	density of the universe will be $\rho_m / \bar \rho(t_m) = 9 \pi^2 /
+	16$. 
+\end{quote}
+
+Taking $R_m$ as given, we can compute the (mean) density of the sphere at its
+maximum radius by just dividing the constant mass $M$ by the volume:
+\begin{equation}
+	\rho_m
+	= \frac{M}{V_m}
+	= \frac{M}{ (4\pi/3) R_m^3 }
+	= \frac{3 M}{4 \pi} \frac{\pi^2}{8 G M t_m^2}
+	= \frac{3 \pi}{32 G t_m^2}.
+\end{equation}
+
+Next we need to handle the evolution of the mean density of the universe.
+During matter domination, which is when I assume this problem is taking place, we have 
+$\bar\rho \propto a^{-3}$, and $a \propto t^{2/3}$. Further, we know
+\begin{equation}
+	H^2 = \frac{8 \pi G}{3} \bar\rho
+\end{equation}
+under the assumption of a flat universe ($\bar\rho = \rho_c$), which is (I
+think) the same as assuming matter domination. As usual, $H = \dot a/a$, and we
+can take our proportionality relation for $a$ above to find $\dot a = 2 a / 3
+t$. Plugging this in, we find
+\begin{equation}
+	\frac{4}{9t^2} = \frac{8 \pi G}{3} \bar\rho
+\end{equation}
+which reduces to
+\begin{equation}
+	\bar\rho = \frac{1}{6 \pi G t^2}.
+	\label{eq:rho_bar}
+\end{equation}
+
+Putting these together gives
+\begin{equation}
+	\frac{\rho_m}{\bar\rho(t_m)}
+	= \frac{3 \pi}{32 G t_m^2} \frac{6 \pi G t_m^2}{1}
+	= \frac{9 \pi^2}{16}
+\end{equation}
+as desired.
+
+
+\section*{part (d)}
+
+\begin{quote}
+	The collapse of the sphere will proceed in reverse, and will therefore
+	take $t_m$ to do so. However, upon full collapse shell-crossing will
+	occur, because the collisionless dark matter will pass through the
+	origin and oscillate around it. This process can be modeled to derive
+	the detailed structure of the resulting halo mass profile, but the
+	virial theorem ($U = -2K$) can tell us about its overall size. Show
+	that the final characteristic radius of the resulting
+	\textit{virialized} halo is $R_\text{vir} = R_m/2$.
+\end{quote}
+
+The total energy $E$ is conserved. It's easy to compute at $t_m$ when $\d R/\d
+t = 0$ and so the kinetic energy is zero. The potential energy is proportional
+to $-GM/R_m$; for our purposes we can just drop this constant of
+proportionality. Thus the total energy is $E = - GM/R_m$.
+
+After virialization, we'll have $E = K + U$ and $U = - 2K$, but $E = - GM/R_m$
+still. Thus, $K = GM/R_m$ and $U = -2 GM/R_m$. We also know that the
+gravitational potential energy of this final configuration will be $U = -
+GM/R_\text{vir}$, where $R_\text{vir}$ is the final radius of the virialized
+halo. Comparing these two values of $U$, we see
+\begin{equation}
+	-2 GM/R_m
+	= - GM/R_\text{vir}
+	\implies
+	R_\text{vir} = R_m / 2.
+\end{equation}
+
+
+\section*{part (e)}
+
+\begin{quote}
+	Show that the mean overdensity within the resulting halo is
+	$\delta_\text{vir} = 18 \pi^2$.
+\end{quote}
+
+We can directly compute the mean density of the resulting halo as
+\begin{equation}
+	\rho
+	= \frac{M}{V}
+	= \frac{3M}{4\pi R_\text{vir}^3}
+	= \frac{6M}{\pi R_m^3}
+	= \frac{3 \pi}{4 G t_m^2}.
+\end{equation}
+We can use equation~\ref{eq:rho_bar} again to find the mean density of the
+universe after virialization:
+\begin{equation}
+	\bar\rho = \bar\rho(2 t_m) = \frac{1}{24 \pi G t_m^2}.
+\end{equation}
+The ratio of these two gives
+\begin{equation}
+	1 + \delta_\text{vir}
+	= \frac{\rho}{\bar\rho}
+	= \frac{3 \pi}{4 G t_m^2} (24 \pi G t_m^2)
+	= 18 \pi^2,
+\end{equation}
+which isn't exactly what we were asked to show but looks really close!
+
+
+\section*{part (f)}
+
+\begin{quote}
+	By linearizing the equations~\ref{eq:ansatz}, show that the linearly
+	extrapolated overdensity at the time of collapse is
+	$\delta_\text{lin}(2 t_m) \approx 1.686$.
+\end{quote}
+
+We begin by series expanding equations~\ref{eq:ansatz} to obtain
+\begin{gather}
+	R/R_m
+	= \frac{1}{2}(1 - \cos\eta)
+	= \frac{\eta^2}{4} - \frac{\eta^4}{48} + \cdots, \\
+	t/t_m
+	= \frac{1}{\pi} (\eta - \sin\eta)
+	= \frac{1}{\pi} \left(
+		\frac{\eta^3}{6} - \frac{\eta^5}{120} + \cdots
+	\right).
+\end{gather}
+I plugged the second series into Mathematica's \texttt{InvertSeries} function
+to obtain
+\begin{equation}
+	\eta^2 = (6\pi t/t_m)^{2/3} \left[
+		1 + \frac{1}{30} (6\pi t/t_m)^{2/3} + \cdots
+	\right].
+\end{equation}
+Plugging this into the $R/R_m$ series gives
+\begin{equation}
+\begin{aligned}
+	R/R_m
+	&= \frac{1}{4} (6\pi t/t_m)^{2/3} \left[
+		1 + \frac{1}{30} (6\pi t/t_m)^{2/3}
+	\right] - \frac{1}{48} (6\pi t/t_m)^{4/3} + \cdots \\
+	&= \frac{1}{4} (6\pi t/t_m)^{2/3} \left[
+		1 - \frac{1}{20} (6\pi t/t_m)^{2/3}
+	\right] + \cdots. \\
+\end{aligned}
+\end{equation}
+Now we want to repeat part (e) using the linearized $R/R_m$. The mean density is
+\begin{equation}
+	1 + \delta_\text{lin}(t)
+	= \frac{\rho}{\bar\rho(t)}
+	= \frac{3M}{4\pi R(t)^3} (6\pi G t^2)
+	= \frac{9 G M t^2}{2 R(t)^3}.
+\end{equation}
+Using the series expansion, we estimate
+\begin{equation}
+\begin{aligned}
+	R^{-3}
+	&= R_m^{-3} \frac{64}{(6 \pi t/t_m)^2} \left[
+		1 - \frac{1}{20} (6\pi t/t_m)^{2/3}
+	\right]^{-3} \\
+	&= \frac{2}{9 G M t^2} \left[
+		1 + \frac{3}{20} (6\pi t/t_m)^{2/3}
+	\right.
+\end{aligned}
+\end{equation}
+which can be inserted readily into $1 + \delta_\text{lin}$ to yield
+\begin{equation}
+	\delta_\text{lin}(t) = \frac{3}{20} (6\pi t/t_m)^{2/3}.
+\end{equation}
+Evaluating this at $t = 2 t_m$, we find
+\begin{equation}
+	\delta_\text{lin}(2 t_m) = \frac{3}{20} (12\pi)^{2/3} \approx 1.686,
+\end{equation}
+as desired.
+
+
+\end{document}
