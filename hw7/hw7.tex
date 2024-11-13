@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage[parfill]{parskip}
+\usepackage{hyperref}
+
+\AtBeginEnvironment{quote}{\par\small}
+
+\renewcommand{\d}{\mathrm{d}}
+
+
+\begin{document}
+
+{
+	\centering
+	\section*{Extragalactic Astrophysics HW7}
+	Connor Hainje
+	\vspace{2em}
+	\par
+}
+
+\textbf{Dynamics, Analytic Exercise \#5}.
+
+\begin{quote}
+	Using the spherical symmetric first-order Jeans Equation,
+	\begin{equation}
+		\partial_r (n \sigma_{rr}^2)
+		+ \frac{n}{r} \left[
+			2 \sigma_{rr}^2
+			- (\sigma_{\theta\theta}^2 + \sigma_{\phi\phi}^2)
+		\right]
+		= - n \partial_r \Phi,
+	\end{equation}
+	show that
+	\begin{equation}
+		M(<r) = - \frac{r \sigma_{rr}^2}{G} \left[
+			\frac{\d \ln n}{\d \ln r}
+			+ \frac{\d \ln \sigma_{rr}^2}{\d \ln r}
+			+ 2 \beta
+		\right].
+	\end{equation}
+\end{quote}
+
+Note that, due to spherical symmetry, $n$ and $\sigma_{rr}^2$ and $\Phi$ are functions
+only of $r$, and thus we can switch between partial and total derivatives
+w.r.t.~$r$ without an issue.
+
+Let's begin from the Jeans Equation. Under spherical symmetry, we have
+$\sigma_{\theta\theta}^2 = \sigma_{\phi\phi}^2$, so
+\begin{equation}
+	\partial_r (n \sigma_{rr}^2)
+	+ \frac{2 n}{r} \left(
+		\sigma_{rr}^2 - \sigma_{\theta\theta}^2
+	\right)
+	= - n \partial_r \Phi.
+\end{equation}
+We can also introduce the anisotropy parameter $\beta \equiv 1 -
+\sigma_{\theta\theta}^2/\sigma_{rr}^2$. Plugging this in simplifies the Jeans
+Equation to
+\begin{equation}
+	\partial_r (n \sigma_{rr}^2)
+	+ \frac{2 n}{r} \sigma_{rr}^2 \beta
+	= - n \partial_r \Phi.
+\end{equation}
+
+Now we want to derive an expression for the total enclosed mass, which requires
+us consider the relation between the gravitational potential $\Phi$ and the
+mass density $\rho$. This relation is
+\begin{equation}
+	\nabla^2 \Phi = 4 \pi G \rho.
+\end{equation}
+The enclosed mass can then be written in terms of $\Phi$ as
+\begin{align}
+	M(<r)
+	&= \int_0^r \d r' \ 4 \pi r'^2 \rho \\
+	&= \int_0^r \d r' \ \frac{r'^2}{G} \nabla'^2 \Phi \\
+	&= \frac{1}{G} \int_0^r \d r' \ \partial_{r'} r'^2 \partial_{r'} \Phi \\
+	&= \frac{r^2}{G} \partial_r \Phi.
+\end{align}
+Now $\partial_r \Phi$ is a term in the Jeans Equation, which we can solve for
+and plug in. This gives
+\begin{align}
+	M(<r)
+	&= -\frac{1}{G} \left[
+		2 r \sigma_{rr}^2 \beta
+		+ \frac{r^2}{n} \partial_r (n \sigma_{rr}^2)
+	\right] \\
+	&= -\frac{r \sigma_{rr}^2}{G} \left[
+		2 \beta
+		+ \frac{r}{n \sigma_{rr}^2} \partial_r (n \sigma_{rr}^2)
+	\right].
+\end{align}
+Finally, we can identify the logarithmic derivative:
+\begin{equation}
+	\frac{\d \ln f}{\d \ln x}
+	= \frac{\d x}{\d \ln x} \frac{\d \ln f}{\d x}
+	= \frac{x}{f} \frac{\d f}{\d x}.
+\end{equation}
+Making this replacement yields
+\begin{equation}
+	M(<r)
+	= -\frac{r \sigma_{rr}^2}{G} \left[
+		2 \beta
+		+ \frac{\d \ln (n \sigma_{rr}^2)}{\d \ln r}
+	\right]
+\end{equation}
+or, expanding using log rules,
+\begin{equation}
+	M(<r)
+	= -\frac{r \sigma_{rr}^2}{G} \left[
+		2 \beta
+		+ \frac{\d \ln n}{\d \ln r}
+		+ \frac{\d \ln \sigma_{rr}^2}{\d \ln r}
+	\right],
+\end{equation}
+as desired.
+
+
+
+\end{document}
